@@ -9,6 +9,7 @@
       "Bash(pnpm typecheck*)",
       "Bash(pnpm db:*)",
       "Bash(pnpm exec prisma*)",
+      "Bash(pnpm --filter*)",
       "Bash(git init*)",
       "Bash(git add*)",
       "Bash(git commit*)",

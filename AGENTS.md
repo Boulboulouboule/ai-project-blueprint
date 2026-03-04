@@ -72,7 +72,24 @@ Internal packages use `@repo/` scope: `@repo/shared`, `@repo/db`, `@repo/ui`.
 2. **Before a technical decision**: Check `adr/` for prior decisions. Record new decisions with `/create-adr`.
 3. **Feature development**: Use `/create-feature` to scaffold the vertical slice.
 4. **Before committing**: Run `pnpm lint && pnpm typecheck && pnpm test`.
-5. **Code review**: Run `/code-review` to check for issues.
+5. **Code review**: Use the `code-reviewer` agent to check for issues.
+
+## Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `/create-spec [feature]` | Create a feature specification |
+| `/create-adr [title]` | Record an architectural decision |
+| `/plan [description]` | Create a phased implementation plan |
+| `/create-feature [name]` | Scaffold a vertical slice (also model-invocable) |
+
+## Agents
+
+| Agent | Purpose |
+|-------|---------|
+| `code-reviewer` | Read-only code review with severity-rated report |
+| `test-runner` | Run tests, analyze failures, suggest fixes |
+| `spec-checker` | Sync specs with code, detect drift |
 
 ## Commands
 

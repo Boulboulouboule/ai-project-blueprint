@@ -1,4 +1,6 @@
 ---
+disable-model-invocation: false
+user-invocable: true
 description: Scaffold a vertical slice feature with all layers
 ---
 
@@ -9,7 +11,7 @@ description: Scaffold a vertical slice feature with all layers
 You are scaffolding a complete vertical slice for the **$ARGUMENTS** feature. This creates all layers: schema, types, API route, service, tests, and UI component.
 
 ### Step 1: Check for a Spec
-Look for `specs/$ARGUMENTS.spec.md`. If it exists, use it as the source of truth for the data model, API, and components. If not, ask the user if they want to create one first with `/create-spec $ARGUMENTS`.
+Look for `specs/$ARGUMENTS/spec.md`. If it exists, use it as the source of truth for the data model, API, and components. If not, ask the user if they want to create one first with `/create-spec $ARGUMENTS`.
 
 ### Step 2: Read Project Conventions
 - Read `AGENTS.md` for naming and structure conventions

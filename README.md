@@ -1,66 +1,108 @@
 # Project DNA
 
-AI-optimized project bootstrap system. Contains reusable skills, rules, templates, and architecture decisions for generating full-stack TypeScript monorepo projects.
+An AI-optimized project template for full-stack TypeScript applications. Clone it, rename it, start building.
 
-## What's Included
-
-### Skills (`.claude/commands/`)
-
-| Skill | Description |
-|-------|-------------|
-| `/scaffold [name]` | Bootstrap a complete Turborepo project |
-| `/create-spec [feature]` | Generate a feature specification |
-| `/create-adr [title]` | Create an Architecture Decision Record |
-| `/create-feature [name]` | Scaffold a vertical slice (schema + route + service + test) |
-| `/code-review` | Review code for security, quality, and convention compliance |
-| `/plan [description]` | Create a phased implementation plan |
-
-### Generated Stack
+## Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Monorepo | Turborepo + pnpm |
-| Frontend | TanStack Start (React 19, Router, Query) |
-| Backend | Hono (Web Standards API, type-safe RPC) |
-| Database | Prisma + PostgreSQL |
-| Styling | Tailwind CSS v4 |
-| Validation | Zod |
-| Testing | Vitest |
-| Linting | ESLint + Prettier |
-
-### Cursor Rules (`.cursor/rules/`)
-
-8 technology-specific rule files for consistent AI-generated code:
-- TypeScript, React, Hono API, Prisma, Testing, Tailwind, Zod, Project Structure
-
-### Architecture Decision Records (`adr/`)
-
-7 base ADRs documenting key technology choices with alternatives considered and tradeoffs.
+| **Frontend** | TanStack Start, TanStack Router, TanStack Query, React 19 |
+| **Backend** | Hono, Zod validation |
+| **Database** | Prisma, PostgreSQL |
+| **Styling** | Tailwind CSS v4 |
+| **Components** | Shared UI library with Vitest + Testing Library |
+| **Monorepo** | Turborepo, pnpm workspaces |
+| **Tooling** | ESLint 9, TypeScript 5.9, Prettier |
 
 ## Quick Start
 
-1. Open a terminal in a directory where you want to create a new project
-2. Run `/scaffold my-app` in Claude Code
-3. Claude generates the entire project, installs dependencies, and initializes git
-4. `cd my-app && pnpm dev` to start developing
+```bash
+# Clone the template
+git clone https://github.com/Boulboulouboule/ai-project-blueprint.git my-app
+cd my-app
+
+# Initialize with your project name
+./scripts/init.sh my-app
+
+# Start PostgreSQL
+docker compose up -d
+
+# Run database migrations
+pnpm db:migrate
+
+# Start development
+pnpm dev
+```
+
+- Web: http://localhost:3000
+- API: http://localhost:3001
 
 ## Project Structure
 
 ```
-project-dna/
-├── .claude/commands/     # 6 Claude Code skills
-├── .cursor/rules/        # 8 Cursor rule files
-├── specs/                # Feature spec template
-├── adr/                  # 7 base ADRs + template
-├── AGENTS.md             # Universal agent instructions
-├── CLAUDE.md             # Claude-specific instructions
-└── README.md
+├── apps/
+│   ├── api/                    # Hono backend API
+│   └── web/                    # TanStack Start frontend
+├── packages/
+│   ├── shared/                 # Zod schemas + shared types
+│   ├── ui/                     # React component library
+│   └── db/                     # Prisma + PostgreSQL
+├── tooling/
+│   ├── eslint/                 # ESLint configurations
+│   ├── typescript/             # TypeScript configurations
+│   └── prettier/               # Prettier configuration
+├── specs/                      # Feature specifications
+├── adr/                        # Architecture Decision Records
+├── .claude/skills/             # Claude Code skills
+├── .claude/agents/             # Claude Code agents
+└── .cursor/rules/              # Cursor IDE rules
 ```
 
-## Updating the Scaffold
+## AI Configuration
 
-The scaffold is a single markdown file (`.claude/commands/scaffold.md`). To update:
+This template is optimized for AI-assisted development with pre-configured skills, agents, and rules.
 
-1. Edit the file contents for the phase you want to change
-2. Test by running `/scaffold test-project` in a clean directory
-3. Verify all checks pass: `pnpm install && pnpm test && pnpm build && pnpm typecheck && pnpm lint`
+### Skills (Claude Code)
+
+| Skill | Purpose |
+|-------|---------|
+| `/create-spec [feature]` | Generate a feature specification |
+| `/create-adr [title]` | Record an architectural decision |
+| `/plan [description]` | Create a phased implementation plan |
+| `/create-feature [name]` | Scaffold a complete vertical slice |
+
+### Agents (Claude Code)
+
+| Agent | Purpose |
+|-------|---------|
+| `code-reviewer` | Read-only code review with severity-rated report |
+| `test-runner` | Run tests, analyze failures, suggest fixes |
+| `spec-checker` | Sync specs with code, detect drift |
+
+### Cursor Rules
+
+8 rule files in `.cursor/rules/` covering TypeScript, React, Hono, Prisma, testing, Tailwind, Zod, and project structure conventions.
+
+## Scripts
+
+| Command | Purpose |
+|---------|---------|
+| `pnpm dev` | Start all apps in dev mode |
+| `pnpm build` | Build all packages + apps |
+| `pnpm test` | Run all tests |
+| `pnpm lint` | Lint all packages |
+| `pnpm typecheck` | Type check all packages |
+| `pnpm db:migrate` | Run Prisma migrations |
+| `pnpm db:seed` | Seed the database |
+| `pnpm db:studio` | Open Prisma Studio |
+
+## Documentation
+
+- [`AGENTS.md`](AGENTS.md) — Universal agent instructions and conventions
+- [`CLAUDE.md`](CLAUDE.md) — Claude-specific instructions
+- [`specs/`](specs/) — Feature specifications
+- [`adr/`](adr/) — Architecture Decision Records (7 base decisions)
+
+## License
+
+MIT

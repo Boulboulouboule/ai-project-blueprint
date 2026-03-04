@@ -6,21 +6,25 @@ Claude-specific instructions for this project. Read `AGENTS.md` first for univer
 
 This project connects to the following MCP servers (configured in `.claude.json`):
 - **Context7** — Up-to-date library documentation lookup
-- **TanStack CLI** — TanStack-specific guidance
-- **Prisma** — Schema and query assistance
 
 Use these servers when you need current documentation rather than relying on training data.
 
-## Available Skills
+## Skills
 
 | Skill | When to Use |
 |-------|-------------|
-| `/scaffold [name]` | Bootstrap a new project from scratch |
 | `/create-spec [feature]` | Before implementing a new feature |
 | `/create-adr [title]` | After making a technical decision |
-| `/create-feature [name]` | After a spec is approved, scaffold the vertical slice |
-| `/code-review` | Before committing — checks for issues |
 | `/plan [description]` | Before complex work — creates a phased plan |
+| `/create-feature [name]` | After a spec is approved, scaffold the vertical slice |
+
+## Agents
+
+| Agent | When to Use |
+|-------|-------------|
+| `code-reviewer` | Before committing — read-only review with severity report |
+| `test-runner` | After changes — run tests, analyze failures, suggest fixes |
+| `spec-checker` | After implementing a feature — sync specs with code |
 
 ## File Patterns
 

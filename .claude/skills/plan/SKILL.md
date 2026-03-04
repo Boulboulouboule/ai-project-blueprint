@@ -1,4 +1,6 @@
 ---
+disable-model-invocation: true
+argument-hint: "[description]"
 description: Create a phased implementation plan for complex work
 ---
 

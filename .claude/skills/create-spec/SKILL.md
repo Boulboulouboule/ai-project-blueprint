@@ -1,4 +1,6 @@
 ---
+disable-model-invocation: true
+argument-hint: "[feature-name]"
 description: Generate a feature specification from template
 ---
 
@@ -19,7 +21,7 @@ Read `specs/_template.spec.md` to understand the expected format.
 
 ### Step 3: Generate the Spec
 
-Create the file `specs/$ARGUMENTS.spec.md` with:
+Create the file `specs/$ARGUMENTS/spec.md` with:
 
 1. **Summary**: One paragraph describing the feature and its user value
 2. **User Stories**: 3-5 user stories in "As a {role}, I want {action} so that {benefit}" format

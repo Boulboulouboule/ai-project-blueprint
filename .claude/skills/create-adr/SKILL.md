@@ -1,4 +1,6 @@
 ---
+disable-model-invocation: true
+argument-hint: "[decision-title]"
 description: Generate an Architecture Decision Record
 ---
 

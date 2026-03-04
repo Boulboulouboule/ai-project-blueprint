@@ -177,20 +177,11 @@
             "command": "node \".claude/scripts/hooks/session-end.js\""
           }
         ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \".claude/scripts/hooks/evaluate-session.js\""
-          }
-        ]
       }
     ]
   },
   "enabledPlugins": {
-    "everything-claude-code@everything-claude-code": true
+    "everything-claude-code@everything-claude-code": false
   },
   "extraKnownMarketplaces": {
     "everything-claude-code": {

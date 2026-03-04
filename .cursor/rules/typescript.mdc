@@ -1,0 +1,40 @@
+---
+description: TypeScript coding standards and conventions
+globs: ["**/*.ts", "**/*.tsx"]
+---
+
+# TypeScript Rules
+
+## Strict Mode
+- `strict: true` is non-negotiable — never use `// @ts-ignore` or `// @ts-expect-error` without a comment explaining why
+- Never use `any` — use `unknown` and narrow, or define a proper type
+- Enable `noUncheckedIndexedAccess` for safer array/object access
+
+## Naming Conventions
+- **Files**: `kebab-case.ts` or `{name}.{type}.ts` (e.g., `users.route.ts`, `users.service.ts`)
+- **Types/Interfaces**: PascalCase (`UserProfile`, `ApiResponse`)
+- **Functions/Variables**: camelCase (`getUserById`, `isActive`)
+- **Constants**: UPPER_SNAKE_CASE only for true global constants (`MAX_RETRIES`)
+- **Enums**: Avoid — use `as const` objects or union types instead
+
+## Type Patterns
+- Prefer `type` over `interface` unless you need declaration merging
+- Derive types from Zod schemas: `type User = z.infer<typeof UserSchema>`
+- Never duplicate types that can be inferred or derived
+- Use `satisfies` for type-safe object literals: `const config = { ... } satisfies Config`
+
+## Functions
+- Prefer `function` declarations over arrow functions for top-level functions (hoisting + readable stack traces)
+- Use arrow functions for callbacks and inline functions
+- Keep functions under 30 lines — extract if longer
+- Single return type: explicitly annotate exported function return types
+
+## Imports
+- Use `type` imports for type-only imports: `import type { User } from './types'`
+- Barrel exports (`index.ts`) only at package boundaries
+- No circular imports — if detected, restructure
+
+## Error Handling
+- Use typed errors: `class NotFoundError extends Error { constructor(resource: string, id: string) }`
+- Never swallow errors with empty catch blocks
+- Prefer Result pattern for expected failures, throw for unexpected ones

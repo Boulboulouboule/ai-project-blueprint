@@ -1,16 +1,18 @@
 ---
-description: React component patterns, hooks, and accessibility
-globs: ["**/*.tsx"]
+paths:
+  - "**/*.tsx"
+  - "apps/web/**"
+  - "packages/ui/**"
 ---
 
 # React Rules
 
 ## Component Patterns
+
 - One component per file, file name matches component name (PascalCase)
 - Use function declarations, not arrow functions, for components
 - Props type defined above the component: `type ButtonProps = { ... }`
 - Destructure props in the function signature
-- Colocate tests: `button.tsx` → `button.test.tsx`
 
 ```tsx
 type ButtonProps = {
@@ -29,31 +31,28 @@ export function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
 ```
 
 ## Hooks
-- Custom hooks go in a `hooks/` directory or colocated with the feature
+
+- Custom hooks in a `hooks/` directory or colocated with the feature
 - Prefix with `use`: `useAuth`, `useDebounce`
 - Keep hooks focused — one responsibility per hook
 - Use TanStack Query for server state (never `useEffect` + `useState` for data fetching)
 
 ## State Management
+
 - Server state: TanStack Query (`useQuery`, `useMutation`)
 - URL state: TanStack Router search params
 - Local UI state: `useState` / `useReducer`
 - Avoid global state libraries unless proven necessary
 
 ## Performance
+
 - Avoid premature `useMemo`/`useCallback` — only optimize measured bottlenecks
 - Use `React.lazy()` for route-level code splitting
 - Key lists with stable, unique identifiers (never array index)
 
-## Accessibility
-- All interactive elements must be keyboard-accessible
-- Images require `alt` text (empty `alt=""` for decorative images)
-- Use semantic HTML (`button`, `nav`, `main`, `section`) over generic `div`
-- Form inputs must have associated `label` elements
-- Color is never the sole indicator of state
-
 ## TanStack Router
-- Use file-based routing in `src/routes/`
+
+- File-based routing in `src/routes/`
 - Loaders fetch data before render — no loading spinners for initial data
-- Search params are typed via `validateSearch` with Zod
-- Use `Link` component for navigation (never `<a>` for internal links)
+- Search params typed via `validateSearch` with Zod
+- Use `Link` for navigation (never `<a>` for internal links)

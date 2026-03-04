@@ -1,77 +1,88 @@
 # Claude Instructions
 
-Claude-specific instructions for this project. Read `AGENTS.md` first for universal conventions.
-
 ## MCP Servers
 
-This project connects to the following MCP servers (configured in `.claude.json`):
-- **Context7** — Up-to-date library documentation lookup
+- **Context7** — Use for current library documentation instead of relying on training data.
 
-Use these servers when you need current documentation rather than relying on training data.
+## Architecture
 
-## Skills
+Turborepo monorepo with pnpm workspaces:
 
-| Skill | When to Use |
-|-------|-------------|
-| `/create-spec [feature]` | Before implementing a new feature |
-| `/create-adr [title]` | After making a technical decision |
-| `/plan [description]` | Before complex work — creates a phased plan |
-| `/create-feature [name]` | After a spec is approved, scaffold the vertical slice |
+| Directory | Purpose | Key Tech |
+|-----------|---------|----------|
+| `apps/web` | Frontend + BFF | TanStack Start, TanStack Router, TanStack Query |
+| `apps/api` | Backend API | Hono, Zod validation, OpenAPI |
+| `packages/shared` | Schemas + types | Zod (single source of truth) |
+| `packages/ui` | Component library | React, Tailwind CSS v4 |
+| `packages/db` | Database layer | Prisma, PostgreSQL |
+| `tooling/` | Build configs | ESLint, TypeScript, Prettier |
 
-## Agents
+**Import boundaries:**
+```
+apps/ → packages/    ✅
+packages/ → packages/ ✅ (no circular)
+packages/ → apps/    ❌ NEVER
+```
 
-| Agent | When to Use |
-|-------|-------------|
-| `code-reviewer` | Before committing — read-only review with severity report |
-| `test-runner` | After changes — run tests, analyze failures, suggest fixes |
-| `spec-checker` | After implementing a feature — sync specs with code |
+Internal packages use `@repo/` scope: `@repo/shared`, `@repo/db`, `@repo/ui`.
+
+## Conventions
+
+**Files:** `kebab-case.ts` for plain files, `{name}.{type}.ts` for typed files (`.route.ts`, `.service.ts`, `.schema.ts`, `.test.ts`). Components: `PascalCase.tsx`, one per file.
+
+**Types:** Schema-first — define Zod schema, derive type with `z.infer<typeof Schema>`. Never duplicate types. Names: `{Entity}Schema`, `{Entity}`, `Create{Entity}Schema`.
+
+**API Routes (Hono):** Feature-based `features/{name}/{name}.route.ts`. Validate with `zValidator('json', Schema)`. Return `{ data }` envelope. Export `AppType` for RPC client.
+
+**Components (React):** Function declarations. Props type above component. TanStack Query for server state, Router search params for URL state.
+
+**Testing (Vitest):** Colocated tests. API tests via `app.request()`. AAA pattern. 80% coverage on packages.
+
+**Database (Prisma):** Every model: `id` (cuid), `createdAt`, `updatedAt`. snake_case via `@@map()`/`@map()`. Singleton PrismaClient from `packages/db`. Commit migrations with schema.
+
+**Styling (Tailwind v4):** Utility classes in JSX, no `@apply`. Design tokens via `@theme`. Use theme tokens (`bg-primary`), never hardcode colors.
 
 ## File Patterns
 
-When asked to create or modify files, follow these patterns:
-
-### New API Feature
+**New API feature:**
 ```
 apps/api/src/features/{name}/
-├── {name}.route.ts     # Hono route definitions
-├── {name}.service.ts   # Business logic (optional)
-└── {name}.test.ts      # Tests using app.request()
+├── {name}.route.ts
+├── {name}.service.ts   (if needed)
+└── {name}.test.ts
 ```
 
-### New Schema
-```
-packages/shared/src/{name}.schema.ts
-```
-Then re-export from `packages/shared/src/index.ts`.
+**New schema:** `packages/shared/src/{name}.schema.ts` → re-export from `packages/shared/src/index.ts`
 
-### New UI Component
-```
-packages/ui/src/{name}/
-├── {name}.tsx
-└── {name}.test.tsx
-```
-Then re-export from `packages/ui/src/index.ts`.
+**New UI component:** `packages/ui/src/{name}/{name}.tsx` + `{name}.test.tsx` → re-export from `packages/ui/src/index.ts`
 
-### New Page/Route
-```
-apps/web/src/routes/{path}.tsx
-```
+**New page:** `apps/web/src/routes/{path}.tsx`
 
-## Tool Usage Preferences
+## Commands
 
-- Use `Write` for new files, `Edit` for modifications
-- Use `Glob` to find files by pattern before modifying
-- Use `Grep` to search for existing usage before adding new code
-- Run `pnpm typecheck` after TypeScript changes to verify
-- Run `pnpm test` after logic changes to verify
+| Command | Purpose |
+|---------|---------|
+| `pnpm dev` | Start all apps in dev mode |
+| `pnpm build` | Build all packages + apps |
+| `pnpm test` | Run all tests |
+| `pnpm lint` | Lint all packages |
+| `pnpm typecheck` | Type check all packages |
+| `pnpm db:migrate` | Run Prisma migrations |
+| `pnpm db:seed` | Seed the database |
+| `pnpm db:studio` | Open Prisma Studio |
+| `./scripts/spec-runner.sh <slug>` | Run phased implementation from `specs/<slug>/checklist.md` |
+| `./scripts/spec-runner.sh <slug> --dry-run` | Preview phases without executing |
+| `./scripts/spec-runner.sh <slug> --phase N` | Resume from phase N |
+| `/plan-spec <description>` | Create `specs/{slug}/spec.md` + `checklist.md` for spec-runner |
 
-## Code Style
+## Don'ts
 
-- TypeScript strict mode — no `any`, no `@ts-ignore`
-- Explicit return types on exported functions
-- `type` imports for type-only imports
-- Functional patterns: pure functions, immutability, composition
-- Error handling: typed errors, Result pattern for expected failures
+- Don't use `any` — use `unknown` and narrow
+- Don't create files without reading existing ones first
+- Don't add dependencies without checking if one already exists in the monorepo
+- Don't modify `tooling/` configs without understanding downstream impact
+- Don't skip tests — every feature needs tests
+- Don't import from `apps/` into `packages/`
 
 ## When Unsure
 

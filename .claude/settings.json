@@ -6,6 +6,7 @@
   },
   "permissions": {
     "allow": [
+      "Bash(biome *)",
       "Bash(pnpm *)",
       "Bash(npx *)",
       "Bash(tsx *)",

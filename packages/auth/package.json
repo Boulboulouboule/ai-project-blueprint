@@ -1,5 +1,5 @@
 {
-  "name": "@repo/db",
+  "name": "@repo/auth",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,24 +7,29 @@
     ".": {
       "types": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./src/auth-client.ts",
+      "default": "./src/auth-client.ts"
+    },
+    "./middleware": {
+      "types": "./src/middleware.ts",
+      "default": "./src/middleware.ts"
     }
   },
   "scripts": {
-    "db:migrate": "prisma migrate dev",
-    "db:generate": "prisma generate",
-    "db:seed": "tsx src/seed.ts",
-    "db:studio": "prisma studio",
     "typecheck": "tsc --noEmit",
     "lint": "biome check src/"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.2"
+    "@better-auth/prisma-adapter": "^1.5.3",
+    "@repo/db": "workspace:*",
+    "better-auth": "^1.2.9",
+    "hono": "^4.12.4"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.5.4",
-    "prisma": "^6.19.2",
-    "tsx": "^4.19.3",
     "typescript": "^5.9.3"
   }
 }

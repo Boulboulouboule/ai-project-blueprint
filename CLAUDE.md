@@ -15,7 +15,8 @@ Turborepo monorepo with pnpm workspaces:
 | `packages/shared` | Schemas + types | Zod (single source of truth) |
 | `packages/ui` | Component library | React, Tailwind CSS v4 |
 | `packages/db` | Database layer | Prisma, PostgreSQL |
-| `tooling/` | Build configs | ESLint, TypeScript, Prettier |
+| `packages/auth` | Auth library | BetterAuth, Prisma adapter |
+| `tooling/` | Build configs | Biome, TypeScript |
 
 **Import boundaries:**
 ```
@@ -24,7 +25,7 @@ packages/ → packages/ ✅ (no circular)
 packages/ → apps/    ❌ NEVER
 ```
 
-Internal packages use `@repo/` scope: `@repo/shared`, `@repo/db`, `@repo/ui`.
+Internal packages use `@repo/` scope: `@repo/shared`, `@repo/db`, `@repo/ui`, `@repo/auth`.
 
 ## Conventions
 
@@ -65,7 +66,9 @@ apps/api/src/features/{name}/
 | `pnpm dev` | Start all apps in dev mode |
 | `pnpm build` | Build all packages + apps |
 | `pnpm test` | Run all tests |
-| `pnpm lint` | Lint all packages |
+| `pnpm lint` | Lint all packages (Biome) |
+| `pnpm check` | Lint + format check (Biome) |
+| `pnpm format` | Auto-format all files (Biome) |
 | `pnpm typecheck` | Type check all packages |
 | `pnpm db:migrate` | Run Prisma migrations |
 | `pnpm db:seed` | Seed the database |

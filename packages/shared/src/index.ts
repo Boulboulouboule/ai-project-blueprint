@@ -1,7 +1,8 @@
-export { createApiResponseSchema, ApiErrorSchema, type ApiError } from './api-response.schema';
+export { type ApiError, ApiErrorSchema, createApiResponseSchema } from './api-response.schema';
+export { type SignIn, SignInSchema, type SignUp, SignUpSchema } from './auth.schema';
 export {
-  PaginationSchema,
+  type PaginatedResponse,
   PaginatedResponseSchema,
   type Pagination,
-  type PaginatedResponse,
+  PaginationSchema,
 } from './pagination.schema';

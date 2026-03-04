@@ -1,0 +1,7 @@
+{
+  "extends": "../../tooling/typescript/node.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["src"]
+}

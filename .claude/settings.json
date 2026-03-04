@@ -143,6 +143,17 @@
             "command": "node \".claude/scripts/hooks/post-edit-typecheck.js\""
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/skills/continuous-learning-v2/hooks/observe.sh",
+            "timeout": 10,
+            "async": true
+          }
+        ]
       }
     ],
     "SessionStart": [

@@ -8,11 +8,12 @@ A project template for full-stack TypeScript applications. Clone it, run the ini
 |-------|-----------|
 | **Frontend** | TanStack Start, TanStack Router, TanStack Query, React 19 |
 | **Backend** | Hono, Zod validation |
+| **Auth** | BetterAuth |
 | **Database** | Prisma, PostgreSQL |
 | **Styling** | Tailwind CSS v4 |
 | **Components** | Shared UI library with Vitest + Testing Library |
 | **Monorepo** | Turborepo, pnpm workspaces |
-| **Tooling** | TypeScript 5.9, ESLint 9, Prettier |
+| **Tooling** | TypeScript 5.9, Biome |
 
 ## Quick Start
 
@@ -49,11 +50,10 @@ pnpm dev
 ├── packages/
 │   ├── shared/                 # Zod schemas + shared types
 │   ├── ui/                     # React component library
-│   └── db/                     # Prisma + PostgreSQL
+│   ├── db/                     # Prisma + PostgreSQL
+│   └── auth/                   # BetterAuth
 ├── tooling/
-│   ├── eslint/                 # ESLint configurations
-│   ├── typescript/             # TypeScript configurations
-│   └── prettier/               # Prettier configuration
+│   └── typescript/             # TypeScript configurations
 ├── specs/                      # Feature specifications
 ├── adr/                        # Architecture Decision Records
 └── scripts/
@@ -76,7 +76,8 @@ After cloning this template, run `init.js` from that repo to install:
 | `pnpm dev` | Start all apps in dev mode |
 | `pnpm build` | Build all packages + apps |
 | `pnpm test` | Run all tests |
-| `pnpm lint` | Lint all packages |
+| `pnpm check` | Lint + format check (Biome) |
+| `pnpm format` | Auto-format all files (Biome) |
 | `pnpm typecheck` | Type check all packages |
 | `pnpm db:migrate` | Run Prisma migrations |
 | `pnpm db:seed` | Seed the database |

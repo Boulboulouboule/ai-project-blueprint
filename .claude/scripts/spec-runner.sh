@@ -5,7 +5,7 @@
 # context drift, following Anthropic's harness patterns for long-running agents.
 #
 # Usage:
-#   ./scripts/spec-runner.sh <spec-slug> [options]
+#   .claude/scripts/spec-runner.sh <spec-slug> [options]
 #
 # See --help for full usage.
 #

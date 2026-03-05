@@ -96,7 +96,7 @@ print_usage() {
 spec-runner v${SR_VERSION} — Phased implementation orchestrator
 
 Usage:
-  ./scripts/spec-runner.sh <spec-slug> [options]
+  .claude/scripts/spec-runner.sh <spec-slug> [options]
 
 Arguments:
   spec-slug       Directory name under ${SR_SPECS_DIR}/ containing checklist.md
@@ -118,9 +118,9 @@ Environment variables:
   SR_SUMMARY_INTERVAL Seconds between periodic summaries (default: ${SR_SUMMARY_INTERVAL})
 
 Examples:
-  ./scripts/spec-runner.sh my-feature --dry-run
-  ./scripts/spec-runner.sh my-feature --phase 2
-  ./scripts/spec-runner.sh my-feature --no-pr --output-json
+  .claude/scripts/spec-runner.sh my-feature --dry-run
+  .claude/scripts/spec-runner.sh my-feature --phase 2
+  .claude/scripts/spec-runner.sh my-feature --no-pr --output-json
 EOF
 }
 

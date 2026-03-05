@@ -81,4 +81,4 @@ After generating the plan:
 
 Present the plan to the user and ask for approval before implementing.
 
-> **Tip**: For complex work (3+ phases), use `/plan-spec` instead — it produces a full `specs/{slug}/spec.md` + `checklist.md` ready to run with `./scripts/spec-runner.sh`.
+> **Tip**: For complex work (3+ phases), use `/plan-spec` instead — it produces a full `specs/{slug}/spec.md` + `checklist.md` ready to run with `.claude/scripts/spec-runner.sh`.

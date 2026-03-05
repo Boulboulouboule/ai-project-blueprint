@@ -73,9 +73,9 @@ apps/api/src/features/{name}/
 | `pnpm db:migrate` | Run Prisma migrations |
 | `pnpm db:seed` | Seed the database |
 | `pnpm db:studio` | Open Prisma Studio |
-| `./scripts/spec-runner.sh <slug>` | Run phased implementation from `specs/<slug>/checklist.md` |
-| `./scripts/spec-runner.sh <slug> --dry-run` | Preview phases without executing |
-| `./scripts/spec-runner.sh <slug> --phase N` | Resume from phase N |
+| `.claude/scripts/spec-runner.sh <slug>` | Run phased implementation from `specs/<slug>/checklist.md` |
+| `.claude/scripts/spec-runner.sh <slug> --dry-run` | Preview phases without executing |
+| `.claude/scripts/spec-runner.sh <slug> --phase N` | Resume from phase N |
 | `/plan-spec <description>` | Create `specs/{slug}/spec.md` + `checklist.md` for spec-runner |
 
 ## Don'ts

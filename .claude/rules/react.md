@@ -1,7 +1,7 @@
 ---
 paths:
   - "**/*.tsx"
-  - "apps/web/**"
+  - "**/*.jsx"
   - "packages/ui/**"
 ---
 
@@ -35,12 +35,12 @@ export function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
 - Custom hooks in a `hooks/` directory or colocated with the feature
 - Prefix with `use`: `useAuth`, `useDebounce`
 - Keep hooks focused — one responsibility per hook
-- Use TanStack Query for server state (never `useEffect` + `useState` for data fetching)
+- Never use `useEffect` + `useState` for data fetching — use a data-fetching library
 
 ## State Management
 
-- Server state: TanStack Query (`useQuery`, `useMutation`)
-- URL state: TanStack Router search params
+- Server state: data-fetching library (e.g. TanStack Query)
+- URL state: router search params
 - Local UI state: `useState` / `useReducer`
 - Avoid global state libraries unless proven necessary
 
@@ -49,10 +49,3 @@ export function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
 - Avoid premature `useMemo`/`useCallback` — only optimize measured bottlenecks
 - Use `React.lazy()` for route-level code splitting
 - Key lists with stable, unique identifiers (never array index)
-
-## TanStack Router
-
-- File-based routing in `src/routes/`
-- Loaders fetch data before render — no loading spinners for initial data
-- Search params typed via `validateSearch` with Zod
-- Use `Link` for navigation (never `<a>` for internal links)

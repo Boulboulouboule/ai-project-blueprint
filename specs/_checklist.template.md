@@ -83,7 +83,7 @@ pnpm lint && pnpm typecheck && pnpm test
 ## How to Continue
 
 ```bash
-./scripts/spec-runner.sh {slug}            # resume from currentPhase
-./scripts/spec-runner.sh {slug} --dry-run  # preview remaining phases
-./scripts/spec-runner.sh {slug} --phase N  # start from specific phase
+.claude/scripts/spec-runner.sh {slug}            # resume from currentPhase
+.claude/scripts/spec-runner.sh {slug} --dry-run  # preview remaining phases
+.claude/scripts/spec-runner.sh {slug} --phase N  # start from specific phase
 ```

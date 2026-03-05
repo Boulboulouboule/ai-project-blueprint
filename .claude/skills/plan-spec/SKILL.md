@@ -8,7 +8,7 @@ allowed-tools: Bash, Read, Write, Glob, Grep
 
 You are creating a complete implementation spec for: **$ARGUMENTS**
 
-This produces two files in `specs/{slug}/` that drive `./scripts/spec-runner.sh`.
+This produces two files in `specs/{slug}/` that drive `.claude/scripts/spec-runner.sh`.
 
 ---
 
@@ -172,9 +172,9 @@ pnpm lint && pnpm typecheck && pnpm test
 ## How to Continue
 
 ```bash
-./scripts/spec-runner.sh {slug}            # resume from currentPhase
-./scripts/spec-runner.sh {slug} --dry-run  # preview remaining phases
-./scripts/spec-runner.sh {slug} --phase N  # start from specific phase
+.claude/scripts/spec-runner.sh {slug}            # resume from currentPhase
+.claude/scripts/spec-runner.sh {slug} --dry-run  # preview remaining phases
+.claude/scripts/spec-runner.sh {slug} --phase N  # start from specific phase
 ```
 ````
 
@@ -233,8 +233,8 @@ specs/{slug}/
 {N} phases, {M} tasks total
 
 To run:
-  ./scripts/spec-runner.sh {slug}           # execute all phases
-  ./scripts/spec-runner.sh {slug} --dry-run # preview first
+  .claude/scripts/spec-runner.sh {slug}           # execute all phases
+  .claude/scripts/spec-runner.sh {slug} --dry-run # preview first
 
 Open Questions:
 {List any questions that need answers before starting, or "None"}

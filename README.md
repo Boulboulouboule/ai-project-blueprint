@@ -1,6 +1,6 @@
 # Project DNA
 
-An AI-optimized project template for full-stack TypeScript applications. Clone it, rename it, start building.
+A project template for full-stack TypeScript applications. Clone it, run the init script, start building.
 
 ## Stack
 
@@ -12,7 +12,7 @@ An AI-optimized project template for full-stack TypeScript applications. Clone i
 | **Styling** | Tailwind CSS v4 |
 | **Components** | Shared UI library with Vitest + Testing Library |
 | **Monorepo** | Turborepo, pnpm workspaces |
-| **Tooling** | ESLint 9, TypeScript 5.9, Prettier |
+| **Tooling** | TypeScript 5.9, ESLint 9, Prettier |
 
 ## Quick Start
 
@@ -23,6 +23,9 @@ cd my-app
 
 # Initialize with your project name
 ./scripts/init.sh my-app
+
+# Add AI/Claude Code configuration (optional)
+node /path/to/quodalia/ai-setup/init.js
 
 # Start PostgreSQL
 docker compose up -d
@@ -53,37 +56,20 @@ pnpm dev
 │   └── prettier/               # Prettier configuration
 ├── specs/                      # Feature specifications
 ├── adr/                        # Architecture Decision Records
-├── .claude/skills/             # Claude Code skills
-├── .claude/agents/             # Claude Code agents
-└── .cursor/rules/              # Cursor IDE rules
+└── scripts/
+    └── init.sh                 # Project initialization script
 ```
 
 ## AI Configuration
 
-This template is optimized for AI-assisted development with pre-configured skills, agents, and rules.
+AI/Claude Code configuration is managed separately via [quodalia/ai-setup](https://github.com/quodalia/ai-setup).
 
-### Skills (Claude Code)
+After cloning this template, run `init.js` from that repo to install:
+- Claude Code agents, skills, and rules tailored to the detected stack
+- Hook scripts for formatting, type-checking, and session management
+- `specs/` directory with feature spec templates
 
-| Skill | Purpose |
-|-------|---------|
-| `/create-spec [feature]` | Generate a feature specification |
-| `/create-adr [title]` | Record an architectural decision |
-| `/plan [description]` | Create a phased implementation plan |
-| `/create-feature [name]` | Scaffold a complete vertical slice |
-
-### Agents (Claude Code)
-
-| Agent | Purpose |
-|-------|---------|
-| `code-reviewer` | Read-only code review with severity-rated report |
-| `test-runner` | Run tests, analyze failures, suggest fixes |
-| `spec-checker` | Sync specs with code, detect drift |
-
-### Cursor Rules
-
-8 rule files in `.cursor/rules/` covering TypeScript, React, Hono, Prisma, testing, Tailwind, Zod, and project structure conventions.
-
-## Scripts
+## Commands
 
 | Command | Purpose |
 |---------|---------|
@@ -98,10 +84,7 @@ This template is optimized for AI-assisted development with pre-configured skill
 
 ## Documentation
 
-- [`AGENTS.md`](AGENTS.md) — Universal agent instructions and conventions
-- [`CLAUDE.md`](CLAUDE.md) — Claude-specific instructions
-- [`specs/`](specs/) — Feature specifications
-- [`adr/`](adr/) — Architecture Decision Records (7 base decisions)
+- [`adr/`](adr/) — Architecture Decision Records
 
 ## License
 
